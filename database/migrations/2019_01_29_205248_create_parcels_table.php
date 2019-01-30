@@ -20,7 +20,7 @@ class CreateParcelsTable extends Migration
             $table->integer('weight');
             $table->date('sent_on');
             $table->date('delivered_on');
-            $table->date('status');
+            $table->string('status')->default('Pending'); // Pending ShippedItem Delivered
             $table->text('from_address');
             $table->text('to_address');
             $table->timestamps();

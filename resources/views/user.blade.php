@@ -14,8 +14,11 @@
                                     <i  class="fas fa-plus-square fa-lg h2 text-primary mr-2 "></i>
                                 </span>
                             </div>
-                            @include('includes.errors')
-                            @include('includes.alert')
+                            <div class="col-md-6 mx-auto">
+                                @include('includes.errors')
+                                @include('includes.alert')
+                            
+                            </div>
                             <table class="table table-striped bg-light text-center">
                                 <thead>
                                 <tr class="text-muted">
@@ -34,12 +37,18 @@
                                             <td class="text-right">{{++$key}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->status === 1 ? 'Admin' : 'User`'}}</td>
+                                            <td>{{$user->status === 1 ? 'Admin' : 'User'}}</td>
                                             <td>
-                                                <i class="fas fa-edit fa-lg text-success mr-2"></i>
-                                                <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                                                <span  data-toggle="modal" data-target="#editUser{{ $user->id }}" class="pointer btn btn-link">
+                                                    <i class="fas fa-edit fa-lg text-success mr-2"></i>
+                                                </span>
+                                                <span  data-toggle="modal" data-target="#deleteUser{{ $user->id }}" class="pointer btn btn-link">
+                                                    <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                                                </span>
                                             </td>
                                         </tr>
+                                        @include('modal.editModal')
+                                        @include('modal.deleteModal')
                                     @endforeach
                                 @endif
                                 </tbody>
@@ -86,7 +95,7 @@
     </section>
     <!-- end of tables -->
 
-    <!-- modal -->
+    <!-- Add modal -->
     <div class="modal fade" id="addUser">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -97,34 +106,24 @@
                 <form role="form" method="post" action="{{route('user.store')}}">
                         @csrf
                 <div class="modal-body">
-                    
-                        <div class="box-body">
-                            <div class="">
-                                <div class=" ">
-                                    <div class="form-group">
-                                        <label for="FullName">Full Name:</label>
-                                        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="FullName" placeholder="Enter Full Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email">Email:</label>
-                                        <input type="email" name="email" value="{{old('email')}}" class="form-control" id="Email" placeholder="Enter Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Password">Password:</label>
-                                        <input type="password" name="password"  class="form-control" id="Password" placeholder="*******">
-                                    </div>
+                    <div class="form-group">
+                        <label for="FullName">Full Name:</label>
+                        <input type="text" name="name" value="{{old('name')}}" class="form-control" id="FullName" placeholder="Enter Full Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email:</label>
+                        <input type="email" name="email" value="{{old('email')}}" class="form-control" id="Email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password:</label>
+                        <input type="password" name="password"  class="form-control" id="Password" placeholder="*******">
+                    </div>
 
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="status" value="1"> Assign as an Admin
-                                        </label>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                   
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="status" value="1"> Assign as an Admin
+                        </label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
@@ -135,6 +134,8 @@
         </div>
     </div>
     <!-- end of modal -->
+
+    
 
 @endsection
 

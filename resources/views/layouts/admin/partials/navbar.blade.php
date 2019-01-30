@@ -10,7 +10,7 @@
                     <a href="/" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">ParcelDeliveryApp</a>
                     <div class="bottom-border pb-3">
                         <img src="{{ asset('admin/images/admin.jpeg') }}" width="50" class="rounded-circle mr-3">
-                        <a href="#" class="text-white">{{Auth::user()->name}}</a>
+                        <a href="#" class="text-white">{{ Auth::user() ? Auth::user()->name : '' }}</a>
                     </div>
                     <ul class="navbar-nav flex-column mt-4">
                         <li class="nav-item"><a href="/dashboard" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a></li>

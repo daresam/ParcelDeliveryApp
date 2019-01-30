@@ -48,27 +48,7 @@ class UserController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.
@@ -79,7 +59,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'email' => 'required',
+
+        ];
+
+        $request->validate($rules);
+
+        $admin = User::findOrFail($id);
+
+        if($request->has('password')) {
+            $admin->password = bcrypt($request->password);
+            $admin->save();
+        }
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->status = $request->status == '1' ? 1 : 0;
+
+        $admin->save();
+
+        session()->flash('success', 'User  was Updated Successfully');
+
+        return back();
     }
 
     /**
@@ -90,6 +92,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        session()->flash('success', 'User  was Deleted Successfully');
+        return back();
     }
 }
