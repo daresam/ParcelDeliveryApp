@@ -48,7 +48,7 @@ class UserController extends Controller
         return back();
     }
 
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -67,17 +67,17 @@ class UserController extends Controller
 
         $request->validate($rules);
 
-        $admin = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         if($request->has('password')) {
-            $admin->password = bcrypt($request->password);
-            $admin->save();
+            $user->password = bcrypt($request->password);
+            $user->save();
         }
-        $admin->name = $request->name;
-        $admin->email = $request->email;
-        $admin->status = $request->status == '1' ? 1 : 0;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->status = $request->status == '1' ? 1 : 0;
 
-        $admin->save();
+        $user->save();
 
         session()->flash('success', 'User  was Updated Successfully');
 

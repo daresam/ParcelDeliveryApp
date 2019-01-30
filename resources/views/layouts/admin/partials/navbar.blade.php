@@ -13,7 +13,7 @@
                         <a href="#" class="text-white">{{ Auth::user() ? Auth::user()->name : '' }}</a>
                     </div>
                     <ul class="navbar-nav flex-column mt-4">
-                        <li class="nav-item"><a href="/dashboard" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a></li>
+                        <li class="nav-item"><a href="/dashboard" class="nav-link text-white p-3 mb-2 "><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a></li>
                         <li class="nav-item"><a href="/user" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg mr-3"></i>Users</a></li>
                         <li class="nav-item"><a href="/parcel" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Parcel Orders</a></li>
                     </ul>
